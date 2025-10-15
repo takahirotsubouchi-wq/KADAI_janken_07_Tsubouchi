@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>じゃんけん</title>
+
+        <!-- CSS読み込み -->
+        <link rel="stylesheet" href="css/style.css" />
+
+        <!-- jQuery読み込み -->
+        <script src="js/jquery-3.7.1.min.js"></script>
+    </head>
+<body>
+<header>
+    <h1>じゃんけん</h1>
+</header>
+
+<main>
+    <div class="card">
+        <ul class="choices">
+            <li id="gu" class="choice-btn">✊ グー</li>
+            <li id="choki" class="choice-btn">✌️ チョキ</li>
+            <li id="pa" class="choice-btn">✋ パー</li>
+        </ul>
+        <div class="result-area">
+            <div>
+                コンピュータの手：「<span id="pc-hand">まだ選んでいません</span>」
+            </div>
+            <div id="result" class="result">手を選んでください</div>
+        </div>
+    </div>
+</main>
+
+<script>
+// じゃんけんアプリ概要 -----------------------------------------------
+// 
+// 【基本機能】
+// - プレイヤーがグー・チョキ・パーのボタンをクリックできる
+// - コンピュータがランダムに手を選ぶ
+// - 勝敗を判定して結果を表示する
+// - 結果に応じて色分け表示する
+// 
+// 【画面構成】
+// - #gu ボタン: グーを選択
+// - #choki ボタン: チョキを選択  
+// - #pa ボタン: パーを選択
+// - #pc-hand: コンピュータの手を表示
+// - #result: 勝敗結果を表示
+// 
+// ---------------------------------------------------------------
+
+// じゃんけんゲームの JavaScript を記述してください！
+
+// 1. javascript内にクリック結果を変数として取得する
+const choices = document.querySelectorAll('.choice-btn');
+ // 選択結果を格納する変数
+let selectedChoice = null;
+ // 各ボタンにクリックイベントを設定
+choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+        selectedChoice = choice.id; // 例: "gu", "choki", "pa"
+        console.log("あなたは:", selectedChoice)
+
+        // ここで他の処理に渡すことも可能
+        handleChoice(selectedChoice)
+    });
+});
+
+// - プレイヤーがグー・チョキ・パーのボタンをクリックできる
+$(".choices").on("click",function() {
+// 2. コンピュータがランダムに手を選ぶ
+let num = Math.random();
+c = Math.floor(num * 3)
+if (c == 0) {console.log("グー")} else if(c == 1) {console.log("チョキ")} else {console.log("パー")}
+
+
+
+// 3. あなたとコンピュータの手の比較
+// if ((selectChoice == "gu" && c==1) || (selectChoice == "choki" && c==2) || (selectChoice == "pa" && c==0)) {$(".result").html("あなたの勝ち！")}
+function handleChoice(choiceID) {
+if ((choiceID == "gu" && c==1) || (choiceID == "choki" && c==2) || (choiceID == "pa" && c==0)) {console.log("あなたの勝ち！")} //{$(".result").html("あなたの勝ち！")}
+if ((choiceID == "gu" && c==2) || (choiceID == "choki" && c==0) || (choiceID == "pa" && c==1)) {console.log("PCの勝ち！")} //{$(".result").html("PCの勝ち！")}
+if ((choiceID == "gu" && c==0) || (choiceID == "choki" && c==1) || (choiceID == "pa" && c==2)) {console.log("あいこ")} //{$(".result").html("あいこ")}
+}
+
+
+})
+
+
+</script>
+</body>
+</html>
