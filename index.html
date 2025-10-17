@@ -13,7 +13,7 @@
     </head>
 <body>
 <header>
-    <h1>じゃんけん</h1>
+    <h1> じゃんけん </h1>
 </header>
 
 <main>
@@ -52,6 +52,33 @@
 
 // じゃんけんゲームの JavaScript を記述してください！
 
+const choices = document.querySelectorAll('.choice-btn');
+let selectedChoice = null;
+
+const pcHand = document.getElementById("pc-hand");
+
+// - プレイヤーがグー・チョキ・パーのボタンをクリックできる
+choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+        selectedChoice = choice.id; // "gu", "choki", "pa"
+        console.log("あなたは:", selectedChoice)
+
+        // - コンピュータがランダムに手を選ぶ
+        let num = Math.random();
+        c = Math.floor(num * 3)
+        if (c == 0) {console.log("PCは： グー")} else if(c == 1) {console.log("PCは： チョキ")} else {console.log("PCは： パー")}
+        if (c == 0) {pcHand.textContent = "PCは グー"} 
+        if (c == 1) {pcHand.textContent = "PCは チョキ"} 
+        if (c == 2) {pcHand.textContent = "PCは パー"} 
+
+        // - 勝敗を判定して結果を表示する
+        if ((selectedChoice == "gu" && c==1) || (selectedChoice == "choki" && c==2) || (selectedChoice == "pa" && c==0)) {$(".result").html("あなたの勝ち！").css("color", "green")} //{console.log("あなたの勝ち！")} 
+        if ((selectedChoice == "gu" && c==2) || (selectedChoice == "choki" && c==0) || (selectedChoice == "pa" && c==1)) {$(".result").html("PCの勝ち！").css("color", "red")} //{console.log("PCの勝ち！")} 
+        if ((selectedChoice == "gu" && c==0) || (selectedChoice == "choki" && c==1) || (selectedChoice == "pa" && c==2)) {$(".result").html("あいこ").css("color", "gray")} //{console.log("あいこ")} 
+
+
+    });
+});
 
 </script>
 </body>
